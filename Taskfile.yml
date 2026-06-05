@@ -1,0 +1,20 @@
+version: '3'
+
+tasks:
+  run:
+    vars:
+      INPUT_FILE: "{{default \"main.cpp\" .CLI_ARGS}}"
+      OUTPUT_FILE: main
+      FOLDER_PATH:
+        sh: echo "$HOME/Desktop/cp/exe"
+    desc: "Compile the C++ source and run the executable"
+    cmds:
+      - "g++ {{.USER_WORKING_DIR}}/{{.INPUT_FILE}} -o {{.FOLDER_PATH}}/{{.OUTPUT_FILE}}.exe"
+      - "{{.FOLDER_PATH}}/{{.OUTPUT_FILE}}.exe"
+
+  clear:
+    vars:
+      FOLDER_PATH: $HOME/Desktop/cp/exe/
+    desc: "Clear all executable files"
+    cmds:
+      - "rm -rf {{.FOLDER_PATH}}*"
